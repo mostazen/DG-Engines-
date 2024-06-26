@@ -1,0 +1,356 @@
+<!-- Created by Roman Dragoun -->
+
+        <!-- Created by Mitali-->
+
+<!--Created By Mitali-->
+<!--Do not copy whole or partly without permission-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Map</title>
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Rokkitt:400,600" rel="stylesheet">
+    
+    <!--Font Awesome CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <style type="text/css">
+        
+        /* Created by Roman Dragoun */
+
+        body{
+            margin:0;
+            padding:0; 
+            background-color:#80bfff;
+        }
+        .map{
+            width: 100vw; /* This will make the div width fit the screen */
+            height: auto;
+            position: absolute; 
+            margin: auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom: 0;
+        }
+        img{
+            position: relative;
+            width: 100vw; /* This will make the image width fit the screen */
+            height: auto; /* This will keep the aspect ratio of the height */
+            max-width: 100%; /* This will prevent the image from being wider than its parent */
+            object-fit: contain;
+        }
+        .map div{
+            height: 15px;
+            width: 15px;
+            position:relative;
+            border-radius: 50%;
+            background-color: rgba(187, 94, 94, 0.2);
+            animation: radiate 1.5s infinite;
+        }
+
+         .map div ::after {
+            height: 15px;
+            width: 15px;
+            position:relative;
+            border-radius: 50%;
+            background-color: rgba(187, 94, 94, 0.2);
+            animation: radiate 1.5s infinite;
+        }
+
+        @keyframes radiate {
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+        .m1{
+            bottom:50vw;
+            left:50vw; 
+
+        }
+
+        .m2{
+            bottom:25vw;
+            left:50vw; 
+
+        }
+
+        .m3{
+            bottom:50vw;
+            left:25vw; 
+
+        }
+
+
+        .m4{
+            bottom:50vw;
+            left:70vw; 
+
+        }
+
+
+
+
+
+
+        .modal{
+            position: relative;
+            top:0;
+            bottom: 0;
+            margin: auto;
+            left:0;
+            right: 0;
+            height: 360px;
+            width: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow:5px 5px 10px 7px rgba(0,0,0,0.3); 
+            color:#040c14;
+            padding-left:10px;     
+            font-weight: bold;
+            font-family: 'Rokkitt', serif;
+            visibility: hidden;
+            overflow-y:scroll ;
+        }
+        #close{
+            background-color: #3399ff;
+            font-size: 20px;
+            position: absolute;
+            right: 0;
+            color:white;
+            border:none;
+
+        }
+        span{
+            font-weight: normal;
+            color:#4689cc; 
+        }
+
+
+
+    </style>
+   
+
+</head>
+<body>
+    <div class="map" id="map">
+        <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" >
+        <div class="m1"></div>
+        <div class="m2"></div>
+        <div class="m3"></div>
+        <div class="m4"></div>     
+
+    </div>
+
+
+
+    <div class="modal" id="modal">
+        <button type="button" id="close">     <i class="fa fa-times" ></i></button><br><br>
+
+    </div>
+
+
+
+
+
+<script type="text/javascript">
+    // Created by Roman Dragoun 
+
+        const data = {
+  "m1": [["10vw","10vw"],{"video":'https://www.youtube.com/embed/BD7xNZ0g1GQ?si=JtobLNj6QyDi8Si0'},{"head":"The main heading"},{"text":"another text to add "},{"picture":"https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"},],
+  "m2": [["10vw","10vw"],{"video":'https://www.youtube.com/embed/BD7xNZ0g1GQ?si=JtobLNj6QyDi8Si0'},{"head":"The main heading"},{"text":"another text to add "},{"picture":"https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"},],
+  "m3": [["10vw","10vw"],{"video":'https://www.youtube.com/embed/BD7xNZ0g1GQ?si=JtobLNj6QyDi8Si0'},{"head":"The main heading"},{"text":"another text to add "},{"picture":"https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"},],
+  "m4": [["10vw","10vw"],{"video":'https://www.youtube.com/embed/BD7xNZ0g1GQ?si=JtobLNj6QyDi8Si0'},{"head":"The main heading"},{"text":"another text to add "},{"picture":"https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"},]
+
+
+
+};
+
+
+    
+        
+
+        
+        $(document).ready(function(){
+            
+            
+            $(".map div").click(function(){
+                show();
+            });
+
+
+            function removeAllChildren(div) {
+                while (div.children.length > 3) {
+               div.removeChild(div.lastElementChild);
+              }
+            }
+
+
+
+
+
+            $("#close").click(function(){
+                $(".modal").css("visibility","hidden");
+                const myDiv = document.getElementById('modal');
+                removeAllChildren(myDiv);
+            });
+            function show(){
+                $(".modal").css("visibility","visible");
+            }
+
+
+
+
+
+
+
+
+            function make(dictionary){
+
+                const ckeys=Object.keys(dictionary)[0];
+
+                if (ckeys =="video" ) {
+                // code to be executed if condition is true
+                var div = document.querySelector('.modal');
+                 // Create a new iframe element
+                var iframe = document.createElement('iframe');
+
+                 // Set the iframe's attributes
+                 iframe.src = dictionary[ckeys]; // set the iframe's source URL
+                 iframe.width = '420px'; // set the iframe's width
+                 iframe.height = '315px'; // set the iframe's height
+                 iframe.frameBorder = '0'; // set the iframe's border style
+
+                 // Add the iframe to the div
+                 div.appendChild(iframe);
+
+                }
+
+                if (ckeys =="head" ) {
+                // code to be executed if condition is true
+                var div = document.querySelector('.modal');
+                 // Create a new iframe element
+                var iframe = document.createElement('h1');
+
+                 // Set the iframe's attributes
+                 iframe.textContent = dictionary[ckeys]; // set the iframe's source URL
+                 // set the iframe's border style
+
+                 // Add the iframe to the div
+                 div.appendChild(iframe);
+
+                }
+
+
+                if (ckeys =="text" ) {
+                 // code to be executed if condition is true
+                var div = document.querySelector('.modal');
+                 // Create a new iframe element
+                var iframe = document.createElement('p');
+
+                 // Set the iframe's attributes
+                 iframe.textContent = dictionary[ckeys]; // set the iframe's source URL
+                 // set the iframe's border style
+
+                 // Add the iframe to the div
+                 div.appendChild(iframe);
+
+                }
+
+
+                 if (ckeys =="picture" ) {
+                 // code to be executed if condition is true
+                var div = document.querySelector('.modal');
+                 // Create a new iframe element
+                var iframe = document.createElement('img');
+
+                 // Set the iframe's attributes
+                 iframe.src = dictionary[ckeys]; // set the iframe's source URL
+                 // set the iframe's border style
+
+                 // Add the iframe to the div
+                 div.appendChild(iframe);
+
+                }
+
+                
+
+
+            }
+
+
+
+
+
+            function maker(list){
+
+                const itemslist=list.slice(1,list.length )
+                
+
+
+                for (const element of itemslist) {
+
+                     make(element);
+
+                    }
+
+
+
+
+
+
+
+
+            }
+
+
+            function process(classname){
+
+                const selecteddata=data[classname];
+                const banner = document.getElementById('modal');
+                banner.style.bottom = selecteddata[0][0];
+                banner.style.left = selecteddata[0][1];
+
+
+
+
+
+
+            }
+
+
+            const divs = document.querySelectorAll('#map div');
+
+            divs.forEach((div) => {
+            div.addEventListener('click', (event) => {
+            const className = event.target.className;
+            process(className);
+            maker(data[className]);
+
+
+
+
+
+                });
+            });
+
+
+
+
+           
+            
+        });
+
+
+
+</script>
+    
+    
+</body>
+</html>
